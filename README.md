@@ -474,6 +474,142 @@ root@943a1b6361cb:/money$ git bisect reset
 
 - [Cheat-sheet](http://www.pauline-vos.nl/git-legit-cheatsheet/)
 
+### 1.1.5. Ten Git problems & how to fix them
+
+#### 1.1.5.1. Speaker
+
+Speaker: Briana Swift
+
+- Trainer, GitHub
+- @brianamarie
+
+#### 1.1.5.2. Notes
+
+Slides: https://brianamarie.github.io/10-git-problems/
+
+Clone: https://github.com/brianamarie/10-git-problems
+
+##### Problem 1: Commit is too big
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#5)
+
+```bash
+$ 01-committed-too-big
+
+$ ./setup.sh
+[master b280591] creating files
+
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 01-committed-too-big/file1.md
+ create mode 100644 01-committed-too-big/file2.md
+ create mode 100644 01-committed-too-big/file3.md
+ create mode 100644 01-committed-too-big/file4.md
+[master a5d608e] committing content for file1
+ 1 file changed, 15 insertions(+)
+[master 587bf0c] add markdown to file1
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+$ ls
+
+README.md   file1.md    file2.md    file3.md    file4.md    next.sh     reset.sh    setup.sh    tutorial.md
+
+$ git lol
+
+* 587bf0c (HEAD -> master) add markdown to file1
+* a5d608e (tag: reset-here) committing content for file1
+* b280591 creating files
+* cf2cf33 (tag: v1.0, tag: before-activity, origin/master, origin/HEAD) update force-pull activity
+* aec5579 add activity files
+* c588ca1 initial commit with draft README
+
+$ git reset reset-here
+
+Unstaged changes after reset:
+M	01-committed-too-big/file1.md
+
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   file1.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add -p
+diff --git a/01-committed-too-big/file1.md b/01-committed-too-big/file1.md
+index e60f5da..0f75f38 100644
+--- a/01-committed-too-big/file1.md
++++ b/01-committed-too-big/file1.md
+@@ -1,15 +1,21 @@
++# Git
++
+ Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+ Git is easy to learn and has a tiny footprint with lightning fast performance. It outclasses SCM tools like Subversion, CVS, Perforce, and ClearCase with features like cheap local branching, convenient staging areas, and multiple workflows.
+
+-Branching and Merging
++### Branching and Merging
+ The Git feature that really makes it stand apart from nearly every other SCM out there is its branching model.
+
+ Git allows and encourages you to have multiple local branches that can be entirely independent of each other. The creation, merging, and deletion of those lines of development takes seconds.
+
+ This means that you can do things like:
+
+-Frictionless Context Switching. Create a branch to try out an idea, commit a few times, switch back to where you branched from, apply a patch, switch back to where you are experimenting, and merge it in.
+-Role-Based Codelines. Have a branch that always contains only what goes to production, another that you merge work into for testing, and several smaller ones for day to day work.
+-Feature Based Workflow. Create new branches for each new feature you're working on so you can seamlessly switch back and forth between them, then delete each branch when that feature gets merged into your main line.
+-Disposable Experimentation. Create a branch to experiment in, realize it's not going to work, and just delete it - abandoning the work—with nobody else ever seeing it (even if you've pushed other branches in the meantime).
++- Frictionless Context Switching
++- Create a branch to try out an idea, commit a few times, switch back to where you branched from, apply a patch, switch back to where you are experimenting, and merge it in.
++Role-Based Codelines
++- Have a branch that always contains only what goes to production, another that you merge work into for testing, and several smaller ones for day to day work
++- Feature Based Workflow
++- Create new branches for each new feature you're working on so you can seamlessly switch back and forth between them, then delete each branch when that feature gets merged into your main line
++- Disposable Experimentation
++- Create a branch to experiment in, realize it's not going to work, and just delete it - abandoning the work—with nobody else ever seeing it (even if you've pushed other branches in the meantime)
+Stage this hunk [y,n,q,a,d,s,e,?]?
+```
+
+##### Problem 2: Accidental Commit
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#6)
+
+##### Problem 3: I'm in a detached head state
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#7)
+
+##### Problem 4: What broke my code?
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#8)
+
+##### Problem 5: I want to merge two repositories
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#9)
+
+##### Problem 6: I want to undo a recursive merge (without GitHub)
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#10)
+
+##### Problem 7: I need Git to ignore a binary file
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#11)
+
+##### Problem 8: How do I remove a submodule?
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#12)
+
+##### Problem 9: I want to undo a rebase
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#13)
+
+##### Problem 10: Can I force pull from the remote?
+
+[Instructions](https://brianamarie.github.io/10-git-problems/#14)
 
 ## 1.2. Main Event
 
