@@ -73,6 +73,34 @@ $ git revert head
 
 Cherry-picking commits
 
+### 1.1.2. Git hooks, aliases, and bears oh my
+
+#### 1.1.2.1. Speaker
+
+Mike Corsaro
+
+- Windows Developer, Atlassian
+- @F0DA
+
+#### 1.1.2.2. Notes
+
+- [Repo with all content](https://bitbucket.org/MikeCorsaro/git-scripts/src/master/)
+
+##### Aliases
+
+- [Aliases folder](https://bitbucket.org/MikeCorsaro/git-scripts/src/a9238748c6a891fdab447b5b58af8542a39a8ad7/aliases/?at=master)
+- [Other Useful aliases (not from the talk)](https://github.com/lee-dohm/dotfiles/blob/8d3c59004154571578c2b32df2cdebb013517630/gitconfig#L8)
+
+In aliases, you can add a `!` to run bash commands in the alias, e.g.:  `!git status`
+
+You can add a script folder (and version it) and add to your `$PATH`.
+
+##### Hooks
+
+Automate things on git events. Client-side and server-side hooks possible.
+
+Hooks are harder to version, because they live inside the `.git/hooks` folder.
+
 ## 1.2. Main Event
 
 February 01, 2019
