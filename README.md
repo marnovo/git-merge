@@ -256,6 +256,225 @@ migrate: checkout: ..., done
 
 In GitHub, if the original repo is deleted, content gets copied to fork.
 
+### 1.1.4. Git Legit
+
+#### 1.1.4.1. Speaker
+
+Speaker: Pauline Vos
+
+- Software Engineer, Werkspot
+
+#### 1.1.4.2. Notes
+
+##### "Atomic" commits
+
+1. So small you can't divide it. Pertains to one fix or feature.
+2. Everything works. Don't break builds.
+3. Clear and concise
+
+Problem? See http://www.commitlogsfromlastnight.com/
+
+##### Exercise
+
+Clone & run: https://github.com/paulinevos/money
+
+```bash
+$ git checkout 1_amend
+Branch '1_amend' set up to track remote branch '1_amend' from 'origin'.
+Switched to a new branch '1_amend'
+```
+
+Make a simple change and stage the change w/ add, then:
+
+```bash
+git commit --amend
+[1_amend 239402f] Update README with setup instructions
+ Author: Pauline Vos <pvos88@gmail.com>
+ Date: Sat Jan 26 10:37:00 2019 +0100
+ 1 file changed, 36 insertions(+)
+```
+
+With `--amend`, you must force push because you're rewriting history.
+
+```bash
+$ git rebase -i HEAD~4
+
+pick 44fa399 Fix division causing unnecessary fractional parts (#495)
+pick 8655b0f Update change log
+pick 4990791 Change Docker setup for Git workshop
+pick 239402f Update README with setup instructions
+
+# Rebase 1ec3b8e..239402f onto 1ec3b8e (4 commands)
+#
+# Commands:
+# p, pick <commit> = use commit
+```
+
+Make different changes to previous commits:
+
+```bash
+$ git checkout 2_rebase
+Branch '2_rebase' set up to track remote branch '2_rebase' from 'origin'.
+Switched to a new branch '2_rebase'
+
+$ code README.md  # making changes to a file
+
+$ git stash
+
+Saved working directory and index state WIP on 2_rebase: d2c0cef Updated currencies (#479)
+
+$ git rebase -i HEAD~8
+
+Stopped at 43ad4f8...  Fix risky tests
+You can amend the commit now, with
+
+  git commit --amend
+
+Once you are satisfied with your changes, run
+
+  git rebase --continue
+
+$  git rebase --continue
+
+[detached HEAD 6449588] Update change log 123
+ Author: Mark Sagi-Kazar <mark.sagikazar@gmail.com>
+ Date: Wed Sep 12 17:09:03 2018 +0200
+ 1 file changed, 5 insertions(+)
+Stopped at 74cdd03...  Fix annotations (#491)
+You can amend the commit now, with
+
+  git commit --amend
+
+Once you are satisfied with your changes, run
+
+  git rebase --continue
+
+$ git rebase --continue
+
+Successfully rebased and updated refs/heads/2_rebase.
+```
+
+Clean-up from previous "late night" commits, making into atomic commits:
+
+```bash
+$ git checkout 3_cleanup
+
+Branch '3_cleanup' set up to track remote branch '3_cleanup' from 'origin'.
+Switched to a new branch '3_cleanup'
+
+$ git log --oneline
+
+$git reset HEAD~
+
+Unstaged changes after reset:
+M	composer.json
+M	src/Currencies/BitcoinCurrencies.php
+M	src/Currencies/CurrencyList.php
+M	tests/Exchange/IndirectExchangeTest.php
+
+$ git status
+
+On branch 3_cleanup
+Your branch is behind 'origin/3_cleanup' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   composer.json
+	modified:   src/Currencies/BitcoinCurrencies.php
+	modified:   src/Currencies/CurrencyList.php
+	modified:   tests/Exchange/IndirectExchangeTest.php
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git log --oneline
+
+$ git add composer.json
+
+$ git commit -m "dependencies"
+
+[3_cleanup 8bdbb4c] dependencies
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git add tests/Exchange/IndirectExchangeTest.php
+
+$ git commit -m "fix risky tests"
+
+[3_cleanup 5045f96] fix risky tests
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git add src/Currencies/BitcoinCurrencies.php
+
+$ git add src/Currencies/CurrencyList.php
+
+$ git commit -m "update currencies"
+
+[3_cleanup 3ca5e77] update currencies
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+$ git rebase -i HEAD~10
+
+Successfully rebased and updated refs/heads/3_cleanup.
+```
+
+##### How to write good commit messages
+
+https://chris.beams.io/posts/git-commit/
+
+> 1. Separate subject from body with a blank line
+> 2. Limit the subject line to 50 characters
+> 3. Capitalize the subject line
+> 4. Do not end the subject line with a period
+> 5. Use the imperative mood in the subject line
+> 6. Wrap the body at 72 characters
+> 7. Use the body to explain what and why vs. how
+
+##### Git bisect
+
+- [A beginner's guide to GIT BISECT - The process of elimination](https://www.metaltoad.com/blog/beginners-guide-git-bisect-process-elimination)
+
+With the PHP Composer from the Docker image open:
+
+```bash
+$ docker run --rm -it -v "$PWD":/money -w /money synon/git-legit:latest
+
+Unable to find image 'synon/git-legit:latest' locally
+latest: Pulling from synon/git-legit
+5e6ec7f28fb7: Pull complete
+cf165947b5b7: Pull complete
+7bd37682846d: Pull complete
+99daf8e838e1: Pull complete
+cd02dfcf7539: Pull complete
+209221f5bdfd: Pull complete
+5200ddc081c5: Pull complete
+f60e885ce860: Pull complete
+d9c1a7b321fd: Pull complete
+fedde42ee51a: Pull complete
+cc30044c7bfe: Pull complete
+Digest: sha256:63fac4799a6c700d8b583da5204b39506d555c5d7aceef24dc36319c88119202
+Status: Downloaded newer image for synon/git-legit:latest
+
+root@943a1b6361cb:/money$ git checkout 4_bisect
+
+Branch 4_bisect set up to track remote branch 4_bisect from origin.
+Switched to a new branch '4_bisect'
+
+root@943a1b6361cb:/money$ git log --oneline
+
+root@943a1b6361cb:/money$ git bisect good c0be76c
+
+root@943a1b6361cb:/money$ git bisect bad fa21802
+
+root@943a1b6361cb:/money$ git bisect reset
+```
+
+##### Cheat sheet
+
+- [Cheat-sheet](http://www.pauline-vos.nl/git-legit-cheatsheet/)
+
+
 ## 1.2. Main Event
 
 February 01, 2019
