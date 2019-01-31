@@ -478,7 +478,7 @@ root@943a1b6361cb:/money$ git bisect reset
 
 #### 1.1.5.1. Speaker
 
-Speaker: Briana Swift
+Briana Swift
 
 - Trainer, GitHub
 - @brianamarie
@@ -610,6 +610,35 @@ Stage this hunk [y,n,q,a,d,s,e,?]?
 ##### Problem 10: Can I force pull from the remote?
 
 [Instructions](https://brianamarie.github.io/10-git-problems/#14)
+
+### 1.1.6. Git Workflows
+
+#### 1.1.5.1. Speaker
+
+Johan Abildskov
+
+- Trainer & Consultant, Praqma
+- @randomsort
+
+#### 1.1.5.2. Notes
+
+Survey with participants on git pros/cons.
+
+##### Comparing Git Workflows
+
+- [Centralized workflow]() (a.k.a. "push to master")
+- [Git Common Flow](https://commonflow.org/) (based on [GitHub flow](https://guides.github.com/introduction/flow/))
+- [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+- [Git Phlow]() (from [Praqma repo](https://github.com/Praqma/git-phlow))
+
+|                      	| Difficulty 	| Tooling 	| Problems 	|
+|----------------------	|:----------:	|:-------:	|:--------:	|
+| Centralized Git Flow 	|      ✅     	|    ✅    	|     🆚    	|
+| Git Common Flow      	|      ✅     	|    ✅    	|     ✅    	|
+| Gitflow              	|      🆚     	|    🛑    	|     🆚    	|
+| Git Phlow            	|      🛑     	|    🆚    	|     🛑    	|
+
+Obs: - [Atlassian comparison](https://www.atlassian.com/git/tutorials/comparing-workflows).
 
 ## 1.2. Main Event
 
